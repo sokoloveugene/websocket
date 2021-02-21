@@ -4,8 +4,8 @@ import io from "socket.io-client";
 
 export let socket;
 
-export const emitMessageSend = (messageBody) => {
-  socket && socket.emit("message", messageBody);
+export const emitMessageSend = (messageBody, callback) => {
+  socket && socket.emit("message", messageBody, callback);
 };
 
 export const emitMessageDelete = (id) => {

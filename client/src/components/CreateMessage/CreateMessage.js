@@ -10,9 +10,13 @@ const CreateMessage = () => {
     setName(name);
   }, []);
 
+  const messageCreatedCallback = ({ res }) => {
+    console.log(res);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    emitMessageSend({ name, message });
+    emitMessageSend({ name, message }, messageCreatedCallback);
     setMessage("");
   };
 

@@ -9,8 +9,9 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("message", ({ name, message }) => {
+  socket.on("message", ({ name, message }, callback) => {
     io.emit("message", { name, message, id: uuidv4(), createdAt: Date.now() });
+    callback({res: "MESSAGE was send for other users"})
   });
 
   socket.on("delete_message", (id) => {
@@ -23,6 +24,10 @@ io.on("connection", (socket) => {
 
   socket.on("close_message", (id) => {
     io.emit("close_message", id);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("USER disconnected")
   });
 });
 
